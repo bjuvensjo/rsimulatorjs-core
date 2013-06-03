@@ -1,0 +1,30 @@
+{
+    "name": "rsimulator-core",
+    "version": "0.3.0",
+    "author": "Magnus Bjuvensjö <bjuvensjo@gmail.com>",
+    "description": "rsimulatorjs-core",
+    "contributors": [ 
+        {
+            "name": "Magnus Bjuvensjö",
+            "email": "bjuvensjo@gmail.com"
+        } 
+    ],
+    "main": "./src/simulator",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bjuvensjo/rsimulatorjs-core.git"
+    },
+    "dependencies" : {
+        "underscore": ">=1.4.4",
+        "log4js": ">=0.6.6"
+    },
+    "devDependencies": {
+        "buster":  "0.5.x"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.6"
+    }
+}
+
+
