@@ -2,7 +2,7 @@ var log = require('./util/log');
 var simulatorResponse = require('./simulatorResponse');
 
 module.exports = (function () {
-    var logger = log.getLogger('rsimulator.core.simulator');
+    var logger = log.getLogger('rsimulatorjs-core.simulator');
     
      // The simulator encapsulates the simulation logic.
     var create = function (spec) {

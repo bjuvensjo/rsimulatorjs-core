@@ -6,7 +6,7 @@ var properties = require('../../util/properties');
 var simulatorResponse = require('../../simulatorResponse');
 
 module.exports = (function () {
-    var logger = log.getLogger('rsimulator.core.handler.jsonHandler');
+    var logger = log.getLogger('rsimulatorjs-core.handler.jsonHandler');
 
     var format = function (jsonString) {
         return JSON.stringify(JSON.parse(jsonString));

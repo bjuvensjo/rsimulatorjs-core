@@ -4,7 +4,7 @@ var log = require('./log');
 var util = require('util');
 
 module.exports = (function () {
-    var logger = log.getLogger('rsimulator.core.util.fileUtils');
+    var logger = log.getLogger('rsimulatorjs-core.util.fileUtils');
 
     return {
 
