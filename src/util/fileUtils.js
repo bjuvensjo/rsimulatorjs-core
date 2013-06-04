@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var fs = require('fs');
-var log = require('./log');
+var log = require('rsimulatorjs-log');
 var util = require('util');
 
 module.exports = (function () {

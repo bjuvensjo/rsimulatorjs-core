@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var fileUtils = require('../../util/fileUtils');
-var log = require('../../util/log');
+var log = require('rsimulatorjs-log');
 var matcher = require('../../util/matcher');
 var properties = require('../../util/properties');
 var simulatorResponse = require('../../simulatorResponse');
