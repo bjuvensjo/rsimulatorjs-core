@@ -28,6 +28,16 @@ buster.testCase('jsonHandler', {
         assert(response.response, 'jsonHandlerTest');
         assert(response.properties, 'jsonHandlerTest');
         assert(response.matchingRequestFile, 'jsonHandlerTest');
+    },
+
+    'findMatch': function () {
+        var request = '';
+
+        var response = jsonHandler.findMatch('test/handler', '/regexp', request);
+
+        assert(response, 'jsonHandlerTest');
+        assert(response.response, 'jsonHandlerTest');
+        assert(response.matchingRequestFile, 'jsonHandlerTest');
     }
 
 });

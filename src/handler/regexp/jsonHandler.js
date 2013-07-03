@@ -9,7 +9,11 @@ module.exports = (function () {
     var logger = log.getLogger('rsimulatorjs-core.handler.jsonHandler');
 
     var format = function (jsonString) {
-        return JSON.stringify(JSON.parse(jsonString));
+        if (jsonString) { 
+            return JSON.stringify(JSON.parse(jsonString));
+        } else {
+            return ""; // jsonString is the empty string or some not thruthy value
+        }
     };
 
     var getProperties = function (candidateFile) {
