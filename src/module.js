@@ -1,7 +1,12 @@
 var simulator = require('./simulator');
+var simulatorScriptInterceptor = require('./simulatorScriptInterceptor');
 
 module.exports = (function () {
     
-    return simulator.create();
+    var theSimulator = simulator.create();
+
+    simulatorScriptInterceptor.intercept(theSimulator);
+
+    return theSimulator;
 
 }());
