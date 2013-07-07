@@ -46,6 +46,7 @@ module.exports = (function () {
             var theMatcher;
             var candidateFilesPath = rootPath + rootRelativePath;
             var candidateFiles = fileUtils.findRequests(candidateFilesPath, this.getExtension());
+            var theSimulatorResponse;
 
             logger.debug('candidateFilesPath: ' + candidateFilesPath);
             
@@ -57,10 +58,12 @@ module.exports = (function () {
                 theMatcher = matcher.create(format(request), format(candidate));
 
                 if (theMatcher.matches()) {
-                    return simulatorResponse.create(getResponse(candidateFile, theMatcher), 
-                                                    getProperties(candidateFile),
-                                                    candidateFile
-                                                   );
+                    theSimulatorResponse = simulatorResponse.create(getResponse(candidateFile, theMatcher), 
+                                                                 getProperties(candidateFile),
+                                                                 candidateFile
+                                                                );
+                    logger.debug('simulatorResponse:  %j', theSimulatorResponse);
+                    return theSimulatorResponse;
                 };
 
                 i += 1;

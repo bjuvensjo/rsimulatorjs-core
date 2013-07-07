@@ -9,7 +9,7 @@ buster.testCase('file-utils', {
         var expected = 2;
 
         assert.equals(actual, expected);
-    },
+    }
 
 });
 
