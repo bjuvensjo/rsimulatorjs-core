@@ -4,9 +4,9 @@ config["Tests"] = (function () {
 
     return {
         environment: "node",
-        rootPath: "./",
+        rootPath: "../",
         tests: [
-            "**/*-test.js"
+            "test/**/*-test.js"
         ]
     };
     

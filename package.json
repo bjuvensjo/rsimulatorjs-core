@@ -19,7 +19,7 @@
         "rsimulatorjs-log": "~0.3.2"
     },
     "devDependencies": {
-        "buster":  "0.5.x"
+        "buster":  "~0.6.12"
     },
     "license": "BSD",
     "engines": {

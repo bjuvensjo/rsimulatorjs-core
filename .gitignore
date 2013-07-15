@@ -1,3 +1,5 @@
 .DS_Store
 .tern*
+.idea
+*.iml
 node_modules

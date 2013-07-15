@@ -17,7 +17,6 @@ module.exports = (function () {
                 var fileNames;
                 var i;
                 var stat;
-                
                 if (fs.existsSync(fileName)) {
                     stat = fs.statSync(fileName);
                     if (stat.isDirectory()) {

@@ -22,7 +22,6 @@ buster.testCase('simulator', {
             contentType: 'json'
         };
 
-
         var actual = theSimulator.service(simulatorRequest);
         assert.equals(actual, 'json');
     }
