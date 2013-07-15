@@ -1,13 +1,17 @@
 {
     "name": "rsimulatorjs-core",
-    "version": "0.3.7",
+    "version": "0.3.8",
     "author": "Magnus Bjuvensjö <bjuvensjo@gmail.com>",
     "description": "rsimulatorjs-core",
     "contributors": [ 
         {
             "name": "Magnus Bjuvensjö",
             "email": "bjuvensjo@gmail.com"
-        } 
+        },
+        {
+            "name": "Anders Bälter",
+            "email": "abaelter@gmail.com"
+        }
     ],
     "main": "./src/module",
     "repository": {
