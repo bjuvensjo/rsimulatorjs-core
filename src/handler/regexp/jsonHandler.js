@@ -70,11 +70,6 @@ module.exports = (function () {
                 matcherCandidate = formatCandidate(candidate);
                 matcherRequest = format(request);
                 theMatcher = matcher.create(matcherRequest, matcherCandidate);
-                console.log('value');
-                console.log(matcherRequest);
-                console.log('candidate');
-                console.log(matcherCandidate);
-                console.log(theMatcher.matches());
                 if (theMatcher.matches()) {
                     theSimulatorResponse = simulatorResponse.create(getResponse(candidateFile, theMatcher), 
                                                                  getProperties(candidateFile),
