@@ -32,6 +32,31 @@ buster.testCase('jsonHandler', {
         assert.equals(response.response, JSON.stringify(expected));
     },
 
+    'empty query string': function () {
+        var requestJSON = '';
+
+        var expected = {
+            "foo": "foo",
+            "bar": "bar"
+        };
+
+        var request = JSON.stringify(requestJSON);
+
+        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
+        assert.equals(response.response, JSON.stringify(expected));
+    },
+
+    'query string': function () {
+        var requestJSON = 'a=b&c=d';
+
+        var expected = "true";
+
+        var request = JSON.stringify(requestJSON);
+
+        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
+        assert.equals(response.response, JSON.stringify(expected));
+    },
+
     'wildcard request': function () {
         var requestJSON = {
             'wildcard': true

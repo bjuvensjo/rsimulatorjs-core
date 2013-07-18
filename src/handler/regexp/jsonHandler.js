@@ -9,22 +9,15 @@ module.exports = (function () {
     var logger = log.getLogger('rsimulatorjs-core.handler.jsonHandler');
 
     var format = function (jsonString) {
-        if (jsonString) { 
-            return JSON.stringify(JSON.parse(jsonString));
-        } else {
-            return ""; // jsonString is the empty string or some not truthy value
-        }
-    };
-
-    var formatCandidate = function (jsonString) {
-        var candidate;
+        var candidate = '""';
         if (jsonString) {
             candidate = jsonString.replace(/\s+(?=((\\[\\"]|[^\\"])*"(\\[\\"]|[^\\"])*")*(\\[\\"]|[^\\"])*$)/g, '');
             candidate = candidate.replace(/\n/, '');
-            return candidate;
-        } else {
-            return ""; // jsonString is the empty string or some not truthy value
+            if (candidate.match(/^[^{["']/)) {
+                candidate = '"' + candidate + '"';
+            }
         }
+        return candidate;
     };
 
     var getProperties = function (candidateFile) {
@@ -37,7 +30,7 @@ module.exports = (function () {
     var getResponse = function (candidateFile, matcher) {
         var responseFile = candidateFile.replace(/Request/, 'Response');
         var responseString = fileUtils.read(responseFile);
-        var response = formatCandidate(responseString);
+        var response = format(responseString);
         var i;
 
         for (i = 1; i < matcher.getGroups().length; i++) {
@@ -67,7 +60,7 @@ module.exports = (function () {
                 candidateFile = candidateFiles[i];
 
                 candidate = fileUtils.read(candidateFile);
-                matcherCandidate = formatCandidate(candidate);
+                matcherCandidate = format(candidate);
                 matcherRequest = format(request);
                 theMatcher = matcher.create(matcherRequest, matcherCandidate);
                 if (theMatcher.matches()) {
