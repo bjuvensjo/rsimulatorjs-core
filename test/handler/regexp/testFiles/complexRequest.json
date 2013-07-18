@@ -1,0 +1,9 @@
+{
+    "household": {
+        "children": 1,
+        "alimonyBenefit": 102.83333333333333,
+        "alimony": (.*)
+    },
+    "contactPerson": "Tomas Andersson",
+    "notes": (.*)
+}

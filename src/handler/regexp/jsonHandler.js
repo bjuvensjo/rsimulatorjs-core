@@ -9,11 +9,15 @@ module.exports = (function () {
     var logger = log.getLogger('rsimulatorjs-core.handler.jsonHandler');
 
     var format = function (jsonString) {
-        if (jsonString) { 
-            return JSON.stringify(JSON.parse(jsonString));
-        } else {
-            return ""; // jsonString is the empty string or some not thruthy value
+        var candidate = '""';
+        if (jsonString) {
+            candidate = jsonString.replace(/\s+(?=((\\[\\"]|[^\\"])*"(\\[\\"]|[^\\"])*")*(\\[\\"]|[^\\"])*$)/g, '');
+            candidate = candidate.replace(/\n/, '');
+            if (candidate.match(/^[^{["']/)) {
+                candidate = '"' + candidate + '"';
+            }
         }
+        return candidate;
     };
 
     var getProperties = function (candidateFile) {
@@ -31,7 +35,7 @@ module.exports = (function () {
 
         for (i = 1; i < matcher.getGroups().length; i++) {
             response = response.replace('${' + i + '}', matcher.getGroups()[i]);
-        };
+        }
 
         return response;
     };
@@ -47,6 +51,8 @@ module.exports = (function () {
             var candidateFilesPath = rootPath + rootRelativePath;
             var candidateFiles = fileUtils.findRequests(candidateFilesPath, this.getExtension());
             var theSimulatorResponse;
+            var matcherRequest;
+            var matcherCandidate;
 
             logger.debug('candidateFilesPath: ' + candidateFilesPath);
             
@@ -54,9 +60,9 @@ module.exports = (function () {
                 candidateFile = candidateFiles[i];
 
                 candidate = fileUtils.read(candidateFile);
-
-                theMatcher = matcher.create(format(request), format(candidate));
-
+                matcherCandidate = format(candidate);
+                matcherRequest = format(request);
+                theMatcher = matcher.create(matcherRequest, matcherCandidate);
                 if (theMatcher.matches()) {
                     theSimulatorResponse = simulatorResponse.create(getResponse(candidateFile, theMatcher), 
                                                                  getProperties(candidateFile),
@@ -64,7 +70,7 @@ module.exports = (function () {
                                                                 );
                     logger.debug('simulatorResponse:  %j', theSimulatorResponse);
                     return theSimulatorResponse;
-                };
+                }
 
                 i += 1;
             }
