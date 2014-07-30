@@ -20,7 +20,7 @@
     },
     "dependencies" : {
         "underscore": ">=1.4.4",
-        "rsimulatorjs-log": "~0.4.0"
+        "rsimulatorjs-log": "http://cuso.edb.se/stash/scm/njsp/rsimulatorjs-log.git#~0.4.0"
     },
     "devDependencies": {
         "buster":  "~0.6.12"
