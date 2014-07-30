@@ -61,6 +61,7 @@ module.exports = (function () {
 
                 candidate = fileUtils.read(candidateFile);
                 matcherCandidate = format(candidate);
+                matcherCandidate = matcherCandidate.replace(/\[/g, '\\['); // allow top level arrays
                 matcherRequest = format(request);
                 theMatcher = matcher.create(matcherRequest, matcherCandidate);
                 if (theMatcher.matches()) {

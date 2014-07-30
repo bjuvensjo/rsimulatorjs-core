@@ -6,7 +6,7 @@ buster.testCase('jsonHandler', {
     'getExtension': function () {
         var actual = jsonHandler.getExtension();
         var expected = 'json';
-            
+
         assert.equals(actual, expected);
     }
 
@@ -83,6 +83,37 @@ buster.testCase('jsonHandler', {
             "value" : 1000,
             "object" : {"value" : 1000}
         };
+
+        var request = JSON.stringify(requestJSON);
+
+        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
+        console.dir(response);
+        assert.equals(response.response, JSON.stringify(expected));
+    },
+
+    'array request': function () {
+        var requestJSON = [];
+
+        var expected = "match";
+
+        var request = JSON.stringify(requestJSON);
+
+        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
+        console.dir(response);
+        assert.equals(response.response, JSON.stringify(expected));
+    },
+
+    'complex array request': function () {
+        var requestJSON = [
+            {
+                a: 1,
+                b: [
+                    1, 2, {}
+                ]
+            }
+        ];
+
+        var expected = "match";
 
         var request = JSON.stringify(requestJSON);
 
