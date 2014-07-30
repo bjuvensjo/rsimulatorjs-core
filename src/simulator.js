@@ -40,9 +40,13 @@ module.exports = (function () {
                 responseBody = 'No simulatorResponse found!';
                 logger.error('%j, simulatorRequest: %j', responseBody, simulatorRequest);
                 theSimulatorResponse = simulatorResponse.create(responseBody);
-            };
+            }
 
             return theSimulatorResponse;
+        };
+
+        that.setGlobalLogLevel = function (logLevel) {
+            log.setGlobalLogLevel(logLevel);
         };
 
         return that;
