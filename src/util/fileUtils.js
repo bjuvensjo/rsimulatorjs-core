@@ -27,8 +27,8 @@ module.exports = (function () {
                     } else if (accepts(fileName)) {
                         logger.debug("adds %s", fileName);
                         files.push(fileName);
-                    };
-                };
+                    }
+                }
             };
 
             var pattern = new RegExp('Request.' + fileExtension + '$');

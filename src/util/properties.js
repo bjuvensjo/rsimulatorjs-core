@@ -24,7 +24,7 @@ module.exports = {
             if (!/^#/.test(line) && /=/.test(line)) {
                 entry = line.split('=');
                 properties[entry[0].trim()] = entry[1].trim();
-            };
+            }
         });
 
         return properties;

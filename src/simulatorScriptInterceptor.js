@@ -32,7 +32,7 @@ module.exports = (function () {
         scriptFunction = getScriptFunction(scriptFile);
         if (scriptFunction) {
             return scriptFunction.call(this, simulatorRequest);
-        };
+        }
         
         return undefined;
     };
@@ -47,7 +47,7 @@ module.exports = (function () {
         scriptFunction = getScriptFunction(scriptFile);
         if (scriptFunction) {
             scriptFunction.call(this, simulatorRequest, simulatorResponse);
-        };
+        }
     };
 
     var applyLocalResponseScript = function (simulatorRequest, simulatorResponse) {
@@ -61,7 +61,7 @@ module.exports = (function () {
             scriptFunction = getScriptFunction(scriptFile);
             if (scriptFunction) {
                 scriptFunction.call(this, simulatorRequest, simulatorResponse);
-            };
+            }
         }
     };
 

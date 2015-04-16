@@ -1,34 +1,24 @@
-var buster = require('buster');
-var properties = require(__filename
-                         .replace(/test/, 'src')
-                         .replace(/-test.js$/, '.js'));
+var expect = require("expect.js");
+var properties = require(__filename.replace(/test/, "src").replace(/-test.js$/, ".js"));
 
-buster.testCase('Non existing properties', {
+describe("properties", function () {
 
-    'getProperties': function () {
-        var theProperties = properties.getProperties('NonExisting.properties');
+    it("getProperties should be empty for non-existing properties", function () {
+        var theProperties = properties.getProperties("NonExisting.properties");
 
-        assert.equals(theProperties, {});
-    }
+        expect(theProperties).to.be.empty();
+    });
 
-});
+    it("getProperties should not be empty for non-existing properties", function () {
+        var theProperties = properties.getProperties(__dirname + "/testFiles/01_.properties");
 
-buster.testCase('Existing properties', {
+        expect(theProperties).not.to.be.empty();
+    });
 
-    'getProperties': function () {
-        var theProperties = properties.getProperties(__dirname + '/testFiles/01_.properties');
+    it("getProperties should have expected value(s)", function () {
+        var theProperties = properties.getProperties(__dirname + "/testFiles/01_.properties");
 
-        assert(theProperties);
-    }
-
-});
-
-buster.testCase('Expected values', {
-
-    'getProperties': function () {
-        var theProperties = properties.getProperties(__dirname + '/testFiles/01_.properties');
-
-        assert.equals(theProperties.foo, 'foo');
-    }
+        expect(theProperties.foo).to.be("foo");
+    });
 
 });

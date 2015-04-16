@@ -1,25 +1,20 @@
-var buster = require('buster');
-var fileUtils = require(__filename.replace(/test/, 'src').replace(/-test.js$/, '.js'));
+var expect = require("expect.js");
+var fileUtils = require(__filename.replace(/test/, "src").replace(/-test.js$/, ".js"));
 
-buster.testCase('file-utils', {
+describe("fileUtils", function () {
 
-    'findRequests': function () {
-        var fileNames = fileUtils.findRequests(__dirname, 'json');
+    it("findRequests should find two files", function () {
+        var fileNames = fileUtils.findRequests(__dirname, "json");
         var actual = fileNames.length;
         var expected = 2;
 
-        assert.equals(actual, expected);
-    }
+        expect(actual).to.be(expected);
+    });
 
-});
-
-buster.testCase('file-utils', {
-
-    'read': function () {
+    it("read should contain some content from the read file", function () {
         var actual = fileUtils.read(__filename);
-        
-        assert(actual.match(/123456/));
-    }
 
+        expect(actual).to.contain("123456");
+    });
+    
 });
-

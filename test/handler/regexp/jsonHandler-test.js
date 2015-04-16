@@ -1,74 +1,70 @@
-var buster = require('buster');
-var jsonHandler = require(__filename.replace(/test/, 'src').replace(/-test.js$/, '.js'));
+var expect = require("expect.js");
+var jsonHandler = require(__filename.replace(/test/, "src").replace(/-test.js$/, ".js"));
 
-buster.testCase('jsonHandler', {
+describe("jsonHandler", function () {
 
-    'getExtension': function () {
+    it("getExtension", function () {
         var actual = jsonHandler.getExtension();
-        var expected = 'json';
+        var expected = "json";
+        
+        expect(actual).to.be(expected);
+    });
 
-        assert.equals(actual, expected);
-    }
-
-});
-
-buster.testCase('jsonHandler', {
-
-    'findMatch object': function () {
+    it("findMatch object", function () {
         var requestJSON = {
-            'foo': 'foo',
-            'bar': true
+            "foo": "foo",
+            "bar": true
         };
+        
+        var expected = {
+            "foo": "foo",
+            "bar": "bar"
+        };
+        
+        
+        var request = JSON.stringify(requestJSON);
+        
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
+        expect(response.response).to.eql(JSON.stringify(expected));
+    });
+
+    it("empty query string", function () {
+        var requestJSON = "";
 
         var expected = {
             "foo": "foo",
             "bar": "bar"
         };
 
-
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        assert.equals(response.response, JSON.stringify(expected));
-    },
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
+        expect(response.response).to.eql(JSON.stringify(expected));        
+    });
 
-    'empty query string': function () {
-        var requestJSON = '';
-
-        var expected = {
-            "foo": "foo",
-            "bar": "bar"
-        };
-
-        var request = JSON.stringify(requestJSON);
-
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        assert.equals(response.response, JSON.stringify(expected));
-    },
-
-    'query string': function () {
-        var requestJSON = 'a=b&c=d';
+    it("query string", function () {
+        var requestJSON = "a=b&c=d";
 
         var expected = "true";
 
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        assert.equals(response.response, JSON.stringify(expected));
-    },
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
+        expect(response.response).to.eql(JSON.stringify(expected));        
+    });
 
-    'wildcard request': function () {
+    it("wildcard request", function () {
         var requestJSON = {
-            'wildcard': true
+            "wildcard": true
         };
 
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        assert.equals(response.response, request);
-    },
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
+        expect(response.response).to.eql(request);        
+    });
 
-    'complex wildcard request': function () {
+    it("complex wildcard request", function () {
         var requestJSON = {
             "household": {
                 "children": 1,
@@ -86,24 +82,24 @@ buster.testCase('jsonHandler', {
 
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        console.dir(response);
-        assert.equals(response.response, JSON.stringify(expected));
-    },
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
 
-    'array request': function () {
+        expect(response.response).to.eql(JSON.stringify(expected));        
+    });
+
+    it("array request", function () {
         var requestJSON = [];
 
         var expected = "match";
 
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        console.dir(response);
-        assert.equals(response.response, JSON.stringify(expected));
-    },
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
 
-    'complex array request': function () {
+        expect(response.response).to.eql(JSON.stringify(expected));        
+    });
+
+    it("complex array request", function () {
         var requestJSON = [
             {
                 a: 1,
@@ -117,8 +113,9 @@ buster.testCase('jsonHandler', {
 
         var request = JSON.stringify(requestJSON);
 
-        var response = jsonHandler.findMatch('test', '/handler/regexp/testFiles', request);
-        console.dir(response);
-        assert.equals(response.response, JSON.stringify(expected));
-    }
+        var response = jsonHandler.findMatch("test", "/handler/regexp/testFiles", request);
+
+        expect(response.response).to.eql(JSON.stringify(expected));        
+    });
+
 });

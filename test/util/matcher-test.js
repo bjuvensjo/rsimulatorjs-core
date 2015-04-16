@@ -1,42 +1,33 @@
-var buster = require('buster');
-var matcher = require(__filename.replace(/test/, 'src').replace(/-test.js$/, '.js'));
+var expect = require("expect.js");
+var matcher = require(__filename.replace(/test/, "src").replace(/-test.js$/, ".js"));
 
+describe("matcher", function () {
 
-buster.testCase('getGroups', {
-
-    'getGroups': function () {
-        var request = 'request';
-        var candidate = '(r)[a-z]+(t)';
+    it("getGroups should have length 3", function () {
+        var request = "request";
+        var candidate = "(r)[a-z]+(t)";
         
         var theMatcher = matcher.create(request, candidate);
 
-        assert.equals(theMatcher.getGroups().length, 3);
-    }
+        expect(theMatcher.getGroups().length).to.be(3);
+    });
 
-});
-
-buster.testCase('matches, should match', {
-
-    'matches': function () {
-        var request = 'request';
-        var candidate = 'r[a-z]+t';
+    it("matches should match", function () {
+        var request = "request";
+        var candidate = "r[a-z]+t";
         
         var theMatcher = matcher.create(request, candidate);
 
-        assert(theMatcher.matches());
-    }
+        expect(theMatcher.matches()).to.be.ok();
+    });
 
-});
-
-buster.testCase('matches, should not match', {
-
-    'matches': function () {
-        var request = 'request';
-        var candidate = 'Xr[a-z]+t';
+    it("matches should not match", function () {
+        var request = "request";
+        var candidate = "Xr[a-z]+t";
         
         var theMatcher = matcher.create(request, candidate);
 
-        refute(theMatcher.matches());
-    }
-
+        expect(theMatcher.matches()).not.to.be.ok();        
+    });
+    
 });

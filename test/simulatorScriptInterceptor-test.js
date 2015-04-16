@@ -1,13 +1,13 @@
-var buster = require('buster');
-var simulatorScriptInterceptor = require(__filename.replace(/test/, 'src').replace(/-test.js$/, '.js'));
+var expect = require("expect.js");
+var simulatorScriptInterceptor = require(__filename.replace(/test/, "src").replace(/-test.js$/, ".js"));
 
-buster.testCase('simulatorScriptInterceptor', {
+describe("simulatorScriptInterceptor", function () {
 
-    'noScript': function () {
+    it("noScript", function () {
         var theSimulator = {
             service: function (simulatorRequest) {
                 return {
-                    response: 'noScript'
+                    response: "noScript"
                 };
             }
         };
@@ -15,18 +15,19 @@ buster.testCase('simulatorScriptInterceptor', {
         simulatorScriptInterceptor.intercept(theSimulator);
 
         var simulatorRequest = {
-            rootPath: 'dummy',
-            rootRelativePath: '',
-            request: 'noScript',
-            contentType: 'json'
+            rootPath: "dummy",
+            rootRelativePath: "",
+            request: "noScript",
+            contentType: "json"
         };
 
 
         var actual = theSimulator.service(simulatorRequest);
-        assert.equals(actual.response, 'noScript');
-    },
+        
+        expect(actual.response).to.be("noScript");
+    });
 
-    'globalRequest': function () {
+    it("globalRequest", function () {
         var theSimulator = {
             service: function (simulatorRequest) {
             }
@@ -35,23 +36,24 @@ buster.testCase('simulatorScriptInterceptor', {
         simulatorScriptInterceptor.intercept(theSimulator);
 
         var simulatorRequest = {
-            rootPath: 'test/handler/regexp/testFiles',
-            rootRelativePath: '',
-            request: 'globalRequest',
-            contentType: 'json'
+            rootPath: "test/handler/regexp/testFiles",
+            rootRelativePath: "",
+            request: "globalRequest",
+            contentType: "json"
         };
 
 
         var actual = theSimulator.service(simulatorRequest);
-        assert.equals(actual.response, 'globalRequest');
-    },
 
-    'localResponse': function () {
+        expect(actual.response).to.be("globalRequest");
+    });
+
+    it("localResponse", function () {
         var theSimulator = {
             service: function (simulatorRequest) {
                 return {
-                    response: 'json',
-                    matchingRequestFile: 'test/handler/regexp/testFiles/02_Request.json'
+                    response: "json",
+                    matchingRequestFile: "test/handler/regexp/testFiles/02_Request.json"
                 };
             }
         };
@@ -59,22 +61,23 @@ buster.testCase('simulatorScriptInterceptor', {
         simulatorScriptInterceptor.intercept(theSimulator);
 
         var simulatorRequest = {
-            rootPath: 'test/handler/regexp/testFiles',
-            rootRelativePath: '',
-            request: 'localResponse',
-            contentType: 'json'
+            rootPath: "test/handler/regexp/testFiles",
+            rootRelativePath: "",
+            request: "localResponse",
+            contentType: "json"
         };
 
 
         var actual = theSimulator.service(simulatorRequest);
-        assert.equals(actual.response, 'localResponse');
-    },
 
-    'globalResponse': function () {
+        expect(actual.response).to.be("localResponse");
+    });
+
+    it("globalResponse", function () {
         var theSimulator = {
             service: function (simulatorRequest) {
                 return {
-                    response: 'json'
+                    response: "json"
                 };
             }
         };
@@ -82,14 +85,15 @@ buster.testCase('simulatorScriptInterceptor', {
         simulatorScriptInterceptor.intercept(theSimulator);
 
         var simulatorRequest = {
-            rootPath: 'test/handler/regexp/testFiles',
-            rootRelativePath: '',
-            request: 'globalResponse',
-            contentType: 'json'
+            rootPath: "test/handler/regexp/testFiles",
+            rootRelativePath: "",
+            request: "globalResponse",
+            contentType: "json"
         };
 
         var actual = theSimulator.service(simulatorRequest);
-        assert.equals(actual.response, 'globalResponse');
-    }
+
+        expect(actual.response).to.be("globalResponse");
+    });
 
 });
